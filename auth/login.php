@@ -1,5 +1,26 @@
 <?php
+    require "../class/auth.php";
+    $auth = new auth();
+    if(isset($_POST['submit']))
+    {
+        $email = $_POST['user'];
+        $pass = $_POST['pass'];
+        $query = "SELECT * FROM `user` where email like '$email'";
+        $count = $auth->count($query);
+        if($count>0)
+        {
+            $data = $auth->view_single($query);
+            if($pass === $data['pass'])
+            {
+                setcookie('user',$email,time()+60*60,'/');
 
+
+                echo "<script> setTimeout(function() {
+              window.location.href='../public';
+            },2000) </script>";
+            }
+        }
+    }
 ?>
 <!doctype html>
 <html lang="en">

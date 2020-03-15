@@ -1,12 +1,14 @@
 <?php
-	class auth{
+    require "app.php";
+	class auth extends app{
 		function auth_check()
 		{
-			if(!isset($_SESSION['user']))
+			if(!isset($_COOKIE['user']))
 			{
 				header("location: ../auth/login.php");
 			}
 		}
+
 	}
 
 ?>
